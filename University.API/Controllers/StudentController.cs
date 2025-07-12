@@ -40,7 +40,7 @@ namespace University.API.Controllers
         {
             var student = _studentService.GetAll();
             if (student == null)
-                throw new KeyNotFoundException($"Student with ID {id} not found.");
+                throw new KeyNotFoundException("There are no students");
 
             return new ApiResponse(student);
         }
