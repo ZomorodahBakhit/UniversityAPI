@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using University.Core.Interfaces;
 using University.Data.Repositories;
 
 namespace University.API.Modules
@@ -10,6 +11,11 @@ namespace University.API.Modules
             builder.RegisterType<StudentRepository>()
                    .As<IStudentRepository>()
                    .InstancePerLifetimeScope();
+
+
+            builder.RegisterType<CourseRepository>()
+                  .As<ICourseRepository>()
+                 .InstancePerLifetimeScope();
         }
     }
 }

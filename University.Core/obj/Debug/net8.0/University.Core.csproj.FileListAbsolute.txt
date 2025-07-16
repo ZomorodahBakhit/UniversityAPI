@@ -13,3 +13,16 @@ C:\Users\USER\source\repos\University.Core\obj\Debug\net8.0\University.Core.dll
 C:\Users\USER\source\repos\University.Core\obj\Debug\net8.0\refint\University.Core.dll
 C:\Users\USER\source\repos\University.Core\obj\Debug\net8.0\University.Core.pdb
 C:\Users\USER\source\repos\University.Core\obj\Debug\net8.0\ref\University.Core.dll
+C:\Users\USER\source\repos\UniversityAPI\University.Core\bin\Debug\net8.0\University.Core.deps.json
+C:\Users\USER\source\repos\UniversityAPI\University.Core\bin\Debug\net8.0\University.Core.dll
+C:\Users\USER\source\repos\UniversityAPI\University.Core\bin\Debug\net8.0\University.Core.pdb
+C:\Users\USER\source\repos\UniversityAPI\University.Core\obj\Debug\net8.0\University.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\USER\source\repos\UniversityAPI\University.Core\obj\Debug\net8.0\University.Core.AssemblyInfoInputs.cache
+C:\Users\USER\source\repos\UniversityAPI\University.Core\obj\Debug\net8.0\University.Core.AssemblyInfo.cs
+C:\Users\USER\source\repos\UniversityAPI\University.Core\obj\Debug\net8.0\University.Core.csproj.CoreCompileInputs.cache
+C:\Users\USER\source\repos\UniversityAPI\University.Core\obj\Debug\net8.0\University.Core.sourcelink.json
+C:\Users\USER\source\repos\UniversityAPI\University.Core\obj\Debug\net8.0\University.Core.dll
+C:\Users\USER\source\repos\UniversityAPI\University.Core\obj\Debug\net8.0\refint\University.Core.dll
+C:\Users\USER\source\repos\UniversityAPI\University.Core\obj\Debug\net8.0\University.Core.pdb
+C:\Users\USER\source\repos\UniversityAPI\University.Core\obj\Debug\net8.0\ref\University.Core.dll
+C:\Users\USER\source\repos\UniversityAPI\University.Core\obj\Debug\net8.0\University.Core.csproj.AssemblyReference.cache

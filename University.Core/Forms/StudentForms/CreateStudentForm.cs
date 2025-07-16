@@ -1,18 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace University.Data.Entities
+namespace University.Core.Forms.StudentForms
 {
-    public class Student
+    public class CreateStudentForm
     {
-
-        public int Id { get; set; }
+        [Required]
         public string Name { get; set; }
+
+        [Required]
+        [EmailAddress]
         public string Email { get; set; }
-        public DateTime CreatedTime { get; internal set; }
-        public DateTime LastUpdatedTime { get; internal set; }
     }
 }

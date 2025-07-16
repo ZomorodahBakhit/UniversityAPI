@@ -5,18 +5,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using University.Data.Contexts.ClassMappings;
-using University.Data.Entities;
+using University.Core.Entities;
 
 namespace University.Data.Contexts
 {
     public class UniversityDbContext : DbContext
     {
         public DbSet<Student> Students { get; set; }
+        public DbSet<Course> Courses { get; set; } // ✅ Added for Course
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfiguration(new StudentMapping());
+            modelBuilder.ApplyConfiguration(new CourseMapping()); // ✅ Added
 
         }
 

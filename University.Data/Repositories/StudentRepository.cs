@@ -1,75 +1,47 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using University.Core.Entities;
+using University.Core.Interfaces;
 using University.Data.Contexts;
-using University.Data.Entities;
 
 namespace University.Data.Repositories
 {
-    public class StudentRepository: IStudentRepository
+    public class StudentRepository : GenericRepository<Student>, IStudentRepository
     {
-        private readonly UniversityDbContext _context;
-        public StudentRepository(UniversityDbContext context)
+        public StudentRepository(UniversityDbContext context): base(context)
         {
-            _context = context;
+            if (context == null)
+                throw new ArgumentNullException(nameof(context));//Ensure the context is not null to avoid NullReferenceException.
+
         }
-        public Student GetById(int id)
-        {
-            return _context.Students.Find(id);
-        }
-        public List<Student> GetAll()
-        {
-            return _context.Students.ToList();
-        }
+        
         public void Add(Student student)
         {
             if (student == null)
-                throw new ArgumentException(nameof(student));
+                throw new ArgumentNullException(nameof(student));
 
-            student.CreatedTime = DateTime.Now;
-            _context.Students.Add(student);
-            _context.SaveChanges();
+            student.SetCreated();//This is defined in the Student class to set the CreatedTime property.
+            base.Add(student);
         }
         public void Update(Student student)
         {
             if (student == null)
-                throw new ArgumentException(nameof(student));
+                throw new ArgumentNullException(nameof(student));
 
-            student.LastUpdatedTime = DateTime.Now;
-            _context.Students.Update(student);
-            _context.SaveChanges();
+            student.SetUpdated();//This is defined in the Student class to set the LastUpdatedTime property.
+            base.Update(student);
         }
-        public void Delete(Student student)
+
+
+        public bool EmailExists(string email)
         {
-            if (student ==null)
-                throw new ArgumentException(nameof(student));
+            if (string.IsNullOrWhiteSpace(email))
+                throw new ArgumentException("Email cannot be empty", nameof(email));
 
-            _context.Students.Remove(student);
-            _context.SaveChanges();
+            return _set.Any(s => s.Email == email); // Use _set from GenericRepository
         }
 
-        public void SaveChanges()
-        {
-            _context.SaveChanges();
-        }
     }
 
     
 
 
-    public interface IStudentRepository
-    {
-        Student GetById(int id);
-        List<Student> GetAll();
-
-
-        void Add(Student student);
-        void Update(Student student);
-        void Delete(Student student);
-        void SaveChanges();
-
-
-    }
 }

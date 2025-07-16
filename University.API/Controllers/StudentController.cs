@@ -1,16 +1,19 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using University.Core.Services;
-using University.Data.Contexts;
-using University.Data.Repositories;
+
 using AutoWrapper.Wrappers;
-using University.Core.Forms;
 using System.Net;
+using University.Core.DTOs;
+using University.Core.Exceptions;
+using University.API.Filters;
+using University.Core.Forms.StudentForms;
 
 namespace University.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [TypeFilter(typeof(APIExceptionFilter))]
     public class StudentController : ControllerBase
     {
         private readonly IStudentService _studentService;
@@ -23,26 +26,31 @@ namespace University.API.Controllers
 
 
         [HttpGet("{id}")]
+        [ProducesResponseType(typeof(StudentDTO), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+
         public ApiResponse GetById(int id)
         {
-            var student = _studentService.GetById(id);
-            if (student == null)
-                throw new KeyNotFoundException($"Student with ID {id} not found.");
-
-            return new ApiResponse(student);
-
+            
+                var student = _studentService.GetById(id);
+                return new ApiResponse(student);
 
         }
 
 
         [HttpGet()]
+        [ProducesResponseType(typeof(List<StudentDTO>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+
         public ApiResponse GetAll()
         {
-            var student = _studentService.GetAll();
-            if (student == null)
-                throw new KeyNotFoundException("There are no students");
 
-            return new ApiResponse(student);
+                var student = _studentService.GetAll();
+                
+                return new ApiResponse(student);
+            
+
         }
 
 
@@ -50,28 +58,50 @@ namespace University.API.Controllers
 
 
         [HttpPost]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+
         public ApiResponse Create([FromBody] CreateStudentForm form)
         {
-            _studentService.Create(form);
-            return new ApiResponse(HttpStatusCode.Created);
+
+
+                _studentService.Create(form);
+                return new ApiResponse(HttpStatusCode.Created);
+            
+
         }
 
 
 
 
         [HttpPut("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)] // Student not found
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public ApiResponse Update(int id, [FromBody] UpdateStudentForm form)
         {
-            _studentService.Update(id, form);
-            return new ApiResponse(HttpStatusCode.OK);
+
+           
+                _studentService.Update(id, form);
+                return new ApiResponse(HttpStatusCode.OK);
+            
+
+
+            
         }
 
 
         [HttpDelete("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)] 
+        [ProducesResponseType(StatusCodes.Status404NotFound)] // Student not found
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)] 
         public ApiResponse Delete(int id)
         {
-            _studentService.Delete(id);
-            return new ApiResponse(HttpStatusCode.OK);
+             _studentService.Delete(id);
+             return new ApiResponse(HttpStatusCode.OK);
+            
         }
     }
 }
