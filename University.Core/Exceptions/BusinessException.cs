@@ -7,19 +7,19 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace University.Core.Exceptions
 {
-    public class BuisnessException: Exception
+    public class BusinessException: Exception
 
     {
         public Dictionary<string, List<string>> Errors { get; set; } 
         
-        public BuisnessException(string message) : base(message)
+        public BusinessException(string message) : base(message)
         {
 
             Errors =  new Dictionary<string, List<string>>();
 
 
         }
-        public BuisnessException(Dictionary<string, List<string>> _errors)
+        public BusinessException(Dictionary<string, List<string>> _errors)
         {
 
             Errors = _errors ??  new Dictionary<string, List<string>>();

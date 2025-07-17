@@ -37,7 +37,7 @@ namespace University.Core.Services
             if (!validation.IsValid)
             {
                 _logger.LogWarning("Validation failed for CreateStudentForm.");
-                throw new BuisnessException(validation.Errors);
+                throw new BusinessException(validation.Errors);
             }
 
 
@@ -47,7 +47,7 @@ namespace University.Core.Services
             if (_studentRepository.EmailExists(form.Email))
             {
                 _logger.LogWarning("Attempted to create student with duplicate email: {email}", form.Email);
-                throw new BuisnessException("Email already exists.");
+                throw new BusinessException("Email already exists.");
             }
 
 
@@ -84,7 +84,7 @@ namespace University.Core.Services
                 throw new ArgumentNullException(nameof(form));
 
             if (string.IsNullOrWhiteSpace(form.Name))
-                throw new BuisnessException("Student name is required.");
+                throw new BusinessException("Student name is required.");
 
 
             var student = _studentRepository.GetById(id);

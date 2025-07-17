@@ -1,4 +1,5 @@
 ﻿using AutoWrapper.Wrappers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -11,6 +12,7 @@ using University.Core.Services;
 
 namespace University.API.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     [TypeFilter(typeof(APIExceptionFilter))]
@@ -36,21 +38,18 @@ namespace University.API.Controllers
             return new ApiResponse(course);
         }
 
-        /// <summary>
-        /// Get all courses
-        /// </summary>
+       
         [HttpGet]
         [ProducesResponseType(typeof(List<CourseDTO>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [Authorize(Roles ="Teacher")]//3
         public ApiResponse GetAll()
         {
             var courses = _courseService.GetAll();
             return new ApiResponse(courses);
         }
 
-        /// <summary>
-        /// Create a new course
-        /// </summary>
+        
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]

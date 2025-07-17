@@ -29,7 +29,7 @@ namespace University.Core.Services
 
             var validation = FormValidator.Validate(form);
             if (!validation.IsValid)
-                throw new BuisnessException(validation.Errors);
+                throw new BusinessException(validation.Errors);
 
             var course = new Course
             {
@@ -46,7 +46,7 @@ namespace University.Core.Services
                 throw new ArgumentNullException(nameof(form));
 
             if (string.IsNullOrWhiteSpace(form.CourseName))
-                throw new BuisnessException("Course name is required.");
+                throw new BusinessException("Course name is required.");
 
             var course = _courseRepository.GetById(id);
             if (course == null)

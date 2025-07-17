@@ -31,7 +31,7 @@ namespace University.API.Filters
 
 
 
-            if (exception is BuisnessException buisnessException)
+            if (exception is BusinessException buisnessException)
             {
                 if (buisnessException.Errors.Any())
                     context.Result = Response(buisnessException.Errors, "Validation Error", StatusCodes.Status400BadRequest);

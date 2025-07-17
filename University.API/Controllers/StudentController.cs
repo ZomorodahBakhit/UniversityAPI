@@ -8,19 +8,24 @@ using University.Core.DTOs;
 using University.Core.Exceptions;
 using University.API.Filters;
 using University.Core.Forms.StudentForms;
+using Microsoft.AspNetCore.Authorization;
 
 namespace University.API.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     [TypeFilter(typeof(APIExceptionFilter))]
     public class StudentController : ControllerBase
     {
+
+        
+
         private readonly IStudentService _studentService;
 
         public StudentController(IStudentService studentService)
         {
-           
+            
             _studentService = studentService;
         }
 
@@ -43,6 +48,7 @@ namespace University.API.Controllers
         [ProducesResponseType(typeof(List<StudentDTO>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
 
+        [Authorize(Roles ="Student")]//3
         public ApiResponse GetAll()
         {
 
