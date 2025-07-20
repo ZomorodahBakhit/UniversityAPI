@@ -11,8 +11,10 @@ using University.Api.Helpers;
 using University.API.Configurations;
 using University.API.Modules;
 using University.Core.Entities.Identity;
+using University.Core.Interfaces;
 using University.Core.Services;
 using University.Data.Contexts;
+using University.Data.Repositories;
 
 
 
@@ -71,6 +73,9 @@ builder.Services.AddIdentity<User, Role>()
     .AddEntityFrameworkStores<UniversityDbContext>()
     .AddDefaultTokenProviders();
 
+builder.Services.AddScoped<IStudentRepository, StudentRepository>();
+
+
 
 //Dependency Injection
 builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
@@ -115,12 +120,32 @@ builder.Services.AddAuthentication(options =>
 // Add services to the container.
 builder.Services.AddControllers();
 
+
+
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowReactApp",
+        builder =>
+        {
+
+            builder.WithOrigins("http://localhost:3000", "https://localhost:3000")
+                        .AllowAnyHeader()
+                        .AllowAnyMethod()
+                        .AllowCredentials();
+
+
+});
+});
+
 var app = builder.Build();
+
 
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+    app.UseCors("AllowReactApp");
 }
 
 

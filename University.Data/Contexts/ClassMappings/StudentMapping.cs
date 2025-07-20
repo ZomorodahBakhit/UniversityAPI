@@ -13,6 +13,9 @@ namespace University.Data.Contexts.ClassMappings
             builder.HasKey(s => s.Id);
             builder.Property(s => s.Id)
                 .HasColumnName("StudentID");
+            builder.HasOne(s => s.User)
+            .WithMany()
+            .HasForeignKey(s => s.UserId);
 
             builder.Property(s => s.Name).HasMaxLength(256);
         }

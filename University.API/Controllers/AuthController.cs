@@ -9,14 +9,18 @@ using University.Core.Services;
 namespace University.API.Controllers
 {
 
-    [Route("api/[controller]")]
+    
     [ApiController]
     [TypeFilter(typeof(APIExceptionFilter))]
+    [Route("api/auth")]
     public class AuthController : Controller
     {
         private readonly ILogger<StudentController> _logger;
         private readonly IAuthService _authService;
         private readonly IJwtTokenHelper _jwtTokenHelper;
+
+
+
         public AuthController(IAuthService authService, IJwtTokenHelper jwtTokenHelper, ILogger<StudentController> logger)
         {
             _authService = authService; 
@@ -31,6 +35,7 @@ namespace University.API.Controllers
             var dto = await _authService.Register(form);
             return new ApiResponse(dto);
         }
+
 
         [HttpPost("login")]
         public async Task<ApiResponse> Login([FromBody] LoginForm form)

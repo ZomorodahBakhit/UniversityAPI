@@ -5,7 +5,7 @@
     "version": "1.0"
   },
   "paths": {
-    "/api/Auth/register": {
+    "/api/auth/register": {
       "post": {
         "tags": [
           "Auth"
@@ -53,7 +53,7 @@
         }
       }
     },
-    "/api/Auth/login": {
+    "/api/auth/login": {
       "post": {
         "tags": [
           "Auth"
@@ -101,7 +101,7 @@
         }
       }
     },
-    "/api/Auth/me": {
+    "/api/auth/me": {
       "get": {
         "tags": [
           "Auth"
@@ -447,7 +447,7 @@
         }
       }
     },
-    "/api/Student/{id}": {
+    "/api/students/{id}": {
       "get": {
         "tags": [
           "Student"
@@ -671,7 +671,7 @@
         }
       }
     },
-    "/api/Student": {
+    "/api/students": {
       "get": {
         "tags": [
           "Student"

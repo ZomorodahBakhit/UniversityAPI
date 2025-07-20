@@ -1,23 +1,29 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using University.Core.DTOs;
+using University.Core.Entities;
 using University.Core.Entities.Identity;
 using University.Core.Exceptions;
 using University.Core.Forms;
+using University.Core.Interfaces;
 using University.Core.Validations;
+
+
 
 namespace University.Core.Services
 {
     public class AuthService : IAuthService
     {
+        private readonly IStudentRepository _studentRepository;
 
         private readonly SignInManager<User> _signInManager;
         private readonly UserManager<User> _userManager;
         private readonly RoleManager<Role> _roleManager;
-        public AuthService(SignInManager<User> signInManager, UserManager<User> userManager, RoleManager<Role> roleManager)
+        public AuthService(SignInManager<User> signInManager, UserManager<User> userManager, RoleManager<Role> roleManager, IStudentRepository studentRepository)
         {
             _signInManager = signInManager;
             _userManager = userManager;
             _roleManager = roleManager;
+            _studentRepository = studentRepository;
         }
         public async Task<UserDTO> Register(RegisterForm request)
         {
@@ -52,6 +58,19 @@ namespace University.Core.Services
 
             await _userManager.AddToRoleAsync(user, request.Role);
 
+            if (request.Role == "Student")
+            {
+                var student = new Student
+                {
+                    Name = $"{user.FirstName} {user.LastName}",
+                    Email = user.Email,
+                    UserId = user.Id
+                    
+                };
+
+                 _studentRepository.Add(student);
+            }
+
             return new UserDTO()
             {
                 FirstName = user.FirstName,
@@ -59,11 +78,13 @@ namespace University.Core.Services
                 Email = user.Email,
                 EmailConfirmed = user.EmailConfirmed,
                 Phone = user.PhoneNumber,
-                PhoneNumberConfirmed = user.PhoneNumberConfirmed
+                PhoneNumberConfirmed = user.PhoneNumberConfirmed,
+                Role = request.Role
             };
-
-
         }
+
+
+        
         public async Task<UserDTO> Login(LoginForm form)
         {
             if (form == null)
@@ -80,6 +101,8 @@ namespace University.Core.Services
                 if (user == null)
                     throw new NotFoundException($"Unable to find account with email {form.Email}.");
 
+                var roles = await _userManager.GetRolesAsync(user);
+
                 var dto = new UserDTO()
                 {
                     Id = user.Id,
@@ -88,7 +111,8 @@ namespace University.Core.Services
                     Email = user.Email,
                     EmailConfirmed = user.EmailConfirmed,
                     Phone = user.PhoneNumber,
-                    PhoneNumberConfirmed = user.PhoneNumberConfirmed
+                    PhoneNumberConfirmed = user.PhoneNumberConfirmed,
+                    Role= roles.FirstOrDefault() ?? "Student"
                 };
 
                 return dto;

@@ -15,5 +15,8 @@ namespace University.Core.DTOs
         public bool EmailConfirmed { get;  set; }
         public string Phone { get;  set; }
         public bool PhoneNumberConfirmed { get;  set; }
+
+        public string Role { get; set; }
+
     }
 }

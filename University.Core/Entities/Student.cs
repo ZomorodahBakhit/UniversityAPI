@@ -1,4 +1,6 @@
-﻿namespace University.Core.Entities
+﻿using University.Core.Entities.Identity;
+
+namespace University.Core.Entities
 {
     public class Student
     {
@@ -9,6 +11,8 @@
         public DateTime CreatedTime { get; private set; }
         public DateTime LastUpdatedTime { get; private set; }
 
+        public int UserId { get; set; }
+        public User User { get; set; }
         public void SetCreated() => CreatedTime = DateTime.Now;
         public void SetUpdated() => LastUpdatedTime = DateTime.Now;
     }

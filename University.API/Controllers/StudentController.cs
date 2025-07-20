@@ -13,7 +13,7 @@ using Microsoft.AspNetCore.Authorization;
 namespace University.API.Controllers
 {
     [Authorize]
-    [Route("api/[controller]")]
+    [Route("api/students")]
     [ApiController]
     [TypeFilter(typeof(APIExceptionFilter))]
     public class StudentController : ControllerBase

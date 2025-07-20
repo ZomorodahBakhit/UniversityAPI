@@ -2,7 +2,7 @@
   {
     "ContainingType": "University.API.Controllers.AuthController",
     "Method": "Login",
-    "RelativePath": "api/Auth/login",
+    "RelativePath": "api/auth/login",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -28,7 +28,7 @@
   {
     "ContainingType": "University.API.Controllers.AuthController",
     "Method": "GetCurrentUser",
-    "RelativePath": "api/Auth/me",
+    "RelativePath": "api/auth/me",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -38,7 +38,7 @@
   {
     "ContainingType": "University.API.Controllers.AuthController",
     "Method": "Register",
-    "RelativePath": "api/Auth/register",
+    "RelativePath": "api/auth/register",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -263,7 +263,7 @@
   {
     "ContainingType": "University.API.Controllers.StudentController",
     "Method": "GetAll",
-    "RelativePath": "api/Student",
+    "RelativePath": "api/students",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -288,7 +288,7 @@
   {
     "ContainingType": "University.API.Controllers.StudentController",
     "Method": "Create",
-    "RelativePath": "api/Student",
+    "RelativePath": "api/students",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -328,7 +328,7 @@
   {
     "ContainingType": "University.API.Controllers.StudentController",
     "Method": "GetById",
-    "RelativePath": "api/Student/{id}",
+    "RelativePath": "api/students/{id}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -368,7 +368,7 @@
   {
     "ContainingType": "University.API.Controllers.StudentController",
     "Method": "Update",
-    "RelativePath": "api/Student/{id}",
+    "RelativePath": "api/students/{id}",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
@@ -422,7 +422,7 @@
   {
     "ContainingType": "University.API.Controllers.StudentController",
     "Method": "Delete",
-    "RelativePath": "api/Student/{id}",
+    "RelativePath": "api/students/{id}",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
